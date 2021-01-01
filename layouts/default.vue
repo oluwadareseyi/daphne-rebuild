@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div ref="cursor" class="cursor">
-      <div :class="`${hovered ? 'scale' : ''}`"></div>
+    <div ref="cursor" :class="`cursor ${hovered ? 'scale' : ''}`">
+      <div></div>
       <span v-if="hovered">{{ hoverText }}</span>
     </div>
     <Nuxt />
@@ -17,7 +17,6 @@ export default {
     return {
       targets: ["a", "nav-item next-link"],
       hovered: false,
-      scale: 1,
       hoverText: "Next"
     };
   },
@@ -26,18 +25,15 @@ export default {
     document.addEventListener("mousemove", e => {
       cursorRef.setAttribute(
         "style",
-        `transform: translate3d(${e.pageX - 10}px, ${e.pageY -
-          10}px, 0px) scale(${this.scale})`
+        `transform: translate3d(${e.pageX - 10}px, ${e.pageY - 10}px, 0px)`
       );
       if (
         this.targets.length > 0 &&
         this.targets.includes(e.target.className.toLowerCase())
       ) {
         this.hovered = true;
-        this.scale = 5;
       } else {
         this.hovered = false;
-        this.scale = 1;
       }
     });
   }
