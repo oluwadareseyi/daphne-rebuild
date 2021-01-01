@@ -1,0 +1,140 @@
+@font-face {
+  font-family: "Alasar";
+  src: url(../assets/fonts/alasar-bold-webfont.62b52262.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sharp-Sans";
+  src: url(../assets/fonts/SharpSansNo1-Book.d857c2ec.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: "Alasar";
+  cursor: none;
+
+  nav {
+    position: absolute;
+    left: 1%;
+    padding: 20px;
+    z-index: 20;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    padding-bottom: 50px;
+
+    .nav-item {
+      display: grid;
+      // text-align: center;
+      transform: rotate(180deg);
+      writing-mode: vertical-lr;
+      color: #ffffff;
+      font-size: clamp(3rem, 10vw, 8rem);
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0.3;
+
+      &.current {
+        height: 80vh;
+        opacity: 1;
+
+        @include media("<=phone") {
+          height: 70vh;
+        }
+      }
+    }
+  }
+
+  .cursor {
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    // transition: 150ms ease-out;
+    z-index: 10;
+    // mix-blend-mode: exclusion;
+    @include media("<=tablet") {
+      display: none;
+    }
+  }
+
+  main {
+    min-height: 100vh;
+    height: 100%;
+    position: relative;
+
+    .slider {
+      display: grid;
+    }
+    .landing {
+      grid-area: 1/1;
+      position: relative;
+      background-size: cover;
+      background-position: 50% 50%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+      opacity: 0;
+
+      &.next {
+        z-index: 0;
+      }
+
+      &.active {
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+
+    .indicator {
+      z-index: 10;
+      position: absolute;
+      color: #ffffff;
+      bottom: 50px;
+      right: 50px;
+      font-size: 14px;
+
+      @include media("<=phone") {
+        bottom: 100px;
+        right: 30px;
+      }
+
+      span {
+        display: inline-block;
+      }
+    }
+
+    .hover-circle {
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      border: 1.2px solid #ffffff;
+      left: 50%;
+      transform: translateX(-50%);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      bottom: 100px;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include media("<=tablet") {
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+      }
+    }
+  }
+}
