@@ -1,6 +1,6 @@
 <template>
   <main @wheel.prevent="wheelListener" v-touch:swipe="swipeListener">
-    <navigation :pageIndex="pageIndex" />
+    <navigation :pageIndex="pageIndex" @goToNext="goToNext" />
     <section class="slider">
       <component
         v-for="(page, index) in pages"
@@ -135,6 +135,15 @@ export default {
         scale: 1,
         ease: "power4.inOut"
       });
+    },
+    goToNext() {
+      this.$store.commit("updateDirection", "up");
+
+      if (this.pageIndex === this.pagesLength - 1) {
+        this.pageIndex = 0;
+      } else {
+        this.pageIndex++;
+      }
     }
   },
   watch: {

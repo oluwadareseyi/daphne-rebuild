@@ -52,6 +52,13 @@ body {
     }
   }
 
+  .cursor-parent {
+    position: relative;
+    span {
+      position: absolute;
+    }
+  }
+
   .cursor {
     width: 15px;
     height: 15px;
@@ -59,11 +66,23 @@ body {
     background-color: #ffffff;
     border-radius: 50%;
     position: absolute;
-    // transition: 150ms ease-out;
     z-index: 10;
-    // mix-blend-mode: exclusion;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Sharp-Sans";
+    font-size: 3px;
+    color: rgb(172, 170, 161);
     @include media("<=tablet") {
       display: none;
+    }
+
+    div {
+      position: absolute;
+
+      &.scale {
+        transition: transform 350ms ease-out;
+      }
     }
   }
 

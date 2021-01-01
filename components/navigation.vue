@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <div class="nav-item previous">{{ nextPage }}</div>
+    <div class="nav-item next-link" @click="$emit('goToNext')">
+      {{ nextPage }}
+    </div>
     <div class="current nav-item">{{ currentPage }}</div>
   </nav>
 </template>
@@ -33,7 +35,7 @@ export default {
         }
       );
       gsap.fromTo(
-        ".nav-item.previous",
+        ".nav-item.next-link",
         {
           duration: 1.2,
           opacity: 0,

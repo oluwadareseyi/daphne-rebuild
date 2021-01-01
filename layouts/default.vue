@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div ref="cursor" class="cursor"></div>
+    <div ref="cursor" class="cursor">
+      <div :class="`${hovered ? 'scale' : ''}`"></div>
+      <span v-if="hovered">{{ hoverText }}</span>
+    </div>
     <Nuxt />
   </div>
 </template>
@@ -10,13 +13,32 @@ import { mapState } from "vuex";
 import gsap from "gsap";
 
 export default {
+  data() {
+    return {
+      targets: ["a", "nav-item next-link"],
+      hovered: false,
+      scale: 1,
+      hoverText: "Next"
+    };
+  },
   mounted() {
     const cursorRef = this.$refs.cursor;
     document.addEventListener("mousemove", e => {
       cursorRef.setAttribute(
         "style",
-        `transform: translate3d(${e.pageX - 10}px, ${e.pageY - 10}px, 0px)`
+        `transform: translate3d(${e.pageX - 10}px, ${e.pageY -
+          10}px, 0px) scale(${this.scale})`
       );
+      if (
+        this.targets.length > 0 &&
+        this.targets.includes(e.target.className.toLowerCase())
+      ) {
+        this.hovered = true;
+        this.scale = 5;
+      } else {
+        this.hovered = false;
+        this.scale = 1;
+      }
     });
   }
 };
