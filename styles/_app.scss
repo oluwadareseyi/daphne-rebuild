@@ -134,12 +134,35 @@ body {
       }
     }
 
+    .collections {
+      position: absolute;
+      font-family: "Sharp-Sans";
+      left: 200px;
+      bottom: 70px;
+      font-size: 14px;
+      color: #ffffff;
+
+      @include media("<=phone") {
+        left: 35%;
+        bottom: 100px;
+        font-size: 12px;
+        // transform: translateX(-50%);
+      }
+
+      .collection {
+        text-transform: capitalize;
+        line-height: 1.8;
+        transition: transform 0.5s;
+        transform: translateX(0);
+
+        &:hover {
+          transform: translateX(10px);
+        }
+      }
+    }
+
     .hover-circle {
       position: absolute;
-      width: 270px;
-      height: 270px;
-      border-radius: 50%;
-      border: 1.2px solid #ffffff;
       left: 50%;
       transform: translateX(-50%);
       text-transform: uppercase;
@@ -149,12 +172,33 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
+      top: 50%;
+
+      span {
+        transition: transform 0.5s;
+      }
+
+      &:hover {
+        span {
+          transform: scale(1.1);
+        }
+      }
+
+      .circle {
+        position: absolute;
+        width: 270px;
+        height: 270px;
+        border-radius: 50%;
+        border: 1.2px solid #ffffff;
+
+        @include media("<=tablet") {
+          width: 200px;
+          height: 200px;
+        }
+      }
 
       @include media("<=tablet") {
-        top: 50%;
         transform: translate(-50%, -50%);
-        width: 200px;
-        height: 200px;
       }
     }
   }

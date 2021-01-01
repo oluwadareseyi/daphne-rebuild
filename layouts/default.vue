@@ -25,11 +25,12 @@ export default {
     document.addEventListener("mousemove", e => {
       cursorRef.setAttribute(
         "style",
-        `transform: translate3d(${e.pageX - 10}px, ${e.pageY - 10}px, 0px)`
+        `transform: translate3d(${e.pageX - 30}px, ${e.pageY - 30}px, 0px)`
       );
       if (
-        this.targets.length > 0 &&
-        this.targets.includes(e.target.className.toLowerCase())
+        (this.targets.length > 0 &&
+          this.targets.includes(e.target.className.toLowerCase())) ||
+        this.targets.includes(e.target.tagName.toLowerCase())
       ) {
         this.hovered = true;
       } else {

@@ -15,7 +15,17 @@
       <span>{{ numberIndex + 1 }}</span> / {{ pagesLength }}
     </div>
     <div class="hover-circle" @mouseover="hoverCircle" @mouseout="leaveCircle">
-      Enter
+      <div class="circle"></div>
+      <span>Enter</span>
+    </div>
+    <div class="collections">
+      <div
+        class="collection"
+        v-for="collect in collection[currentPage]"
+        :key="collect"
+      >
+        {{ collect }}
+      </div>
     </div>
   </main>
 </template>
@@ -47,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["pages", "currentPage", "direction"]),
+    ...mapState(["pages", "currentPage", "direction", "collection"]),
     ...mapGetters(["pagesLength"]),
     nextIndex() {
       return this.pageIndex === this.pagesLength - 1 ? 0 : this.pageIndex + 1;
@@ -112,20 +122,20 @@ export default {
       }
     },
     hoverCircle(e) {
-      gsap.to(".hover-circle", {
-        duration: 0.8,
-        scale: 1.2,
+      gsap.to(".hover-circle .circle", {
+        duration: 1,
+        scale: 1.3,
         ease: "power4.out"
       });
       gsap.to(`.home-${this.currentComponent}`, {
-        delay: 0.05,
-        duration: 0.8,
+        delay: 0.1,
+        duration: 1,
         scale: 1.05,
         ease: "power4.out"
       });
     },
     leaveCircle() {
-      gsap.to(".hover-circle", {
+      gsap.to(".hover-circle .circle", {
         duration: 0.5,
         scale: 1,
         ease: "power4.inOut"
@@ -152,8 +162,10 @@ export default {
       const newComponent = this.pages[newValue];
       const resetComponent = () => {
         gsap.set(`.home-${oldComponent}`, { yPercent: 0, opacity: 0 });
-        this.numberIndex = this.pageIndex;
       };
+      setTimeout(() => {
+        this.numberIndex = this.pageIndex;
+      }, 700);
       const tl = gsap.timeline();
       gsap.set(`.home-${newComponent}`, { opacity: 1 });
       tl.to(`.home-${oldComponent}`, {
@@ -171,6 +183,15 @@ export default {
         "-=1"
       );
 
+      gsap.to(".collections .collection", {
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.05
+      });
+      setTimeout(() => {
+        gsap.set(".collections", { opacity: 0 });
+      }, 400);
+
       setTimeout(() => {
         this.$store.commit("updatePages", {
           current: this.currentComponent,
@@ -186,7 +207,21 @@ export default {
         opacity: 0,
         y: -10
       });
-    }
+      gsap.set(".collections", { opacity: 1 });
+      gsap.fromTo(
+        ".collections .collection",
+        {
+          duration: 0.5,
+          opacity: 0
+        },
+        {
+          duration: 0.5,
+          opacity: 1,
+          stagger: 0.05
+        }
+      );
+    },
+    currentPage() {}
   }
 };
 </script>

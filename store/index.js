@@ -5,7 +5,37 @@ export const state = () => ({
   currentPage: pagesArr[0],
   nextPage: pagesArr[1],
   previousPage: pagesArr[pagesArr.length - 1],
-  direction: "up"
+  direction: "up",
+  collection: {
+    beauty: [
+      "cream",
+      "nude",
+      "rose dust",
+      "pastel",
+      "1,2,3",
+      "strawberry flavour"
+    ],
+    fashion: [
+      "flower bud",
+      "origami",
+      "shade of morning dew",
+      "the other",
+      "pieces of fabric",
+      "girls of the wind",
+      "bloom"
+    ],
+    outdoor: ["blanc de clanc", "ireland", "maisonnettes", "way of life"],
+    project: ["Herbarium", "delirium", "chrysalls"],
+    works: [
+      "Beauty",
+      "texture",
+      "still life",
+      "sport",
+      "fashion",
+      "culinary",
+      "portrait"
+    ]
+  }
 });
 
 export const getters = {
