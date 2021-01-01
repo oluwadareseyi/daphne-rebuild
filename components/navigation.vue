@@ -22,7 +22,7 @@ export default {
       tl.fromTo(
         ".nav-item.current",
         {
-          duration: 1.2,
+          duration: 0.5,
           opacity: 0,
           letterSpacing: "22px",
           y: this.direction === "up" ? -100 : 200,
@@ -37,7 +37,7 @@ export default {
       gsap.fromTo(
         ".nav-item.next-link",
         {
-          duration: 1.2,
+          duration: 0.5,
           opacity: 0,
           letterSpacing: "22px",
           y: this.direction === "up" ? -100 : 200,
