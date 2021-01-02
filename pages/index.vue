@@ -104,6 +104,9 @@ export default {
       }, 2000);
     },
     swipeListener(direction) {
+      if (this.isScrolling) return;
+
+      this.isScrolling = true;
       if (direction === "bottom") {
         this.$store.commit("updateDirection", "up");
 
@@ -120,6 +123,9 @@ export default {
           this.pageIndex--;
         }
       }
+      setTimeout(() => {
+        this.isScrolling = false;
+      }, 2000);
     },
     hoverCircle(e) {
       this.stopAnimations();
