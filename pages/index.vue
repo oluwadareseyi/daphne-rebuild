@@ -122,19 +122,21 @@ export default {
       }
     },
     hoverCircle(e) {
+      this.stopAnimations();
       gsap.to(".hover-circle .circle", {
         duration: 1,
         scale: 1.3,
         ease: "power4.out"
       });
       gsap.to(`.home-${this.currentComponent}`, {
-        delay: 0.1,
         duration: 1,
+        delay: 0.1,
         scale: 1.05,
         ease: "power4.out"
       });
     },
     leaveCircle() {
+      this.stopAnimations();
       gsap.to(".hover-circle .circle", {
         duration: 0.5,
         scale: 1,
@@ -154,6 +156,10 @@ export default {
       } else {
         this.pageIndex++;
       }
+    },
+    stopAnimations() {
+      gsap.killTweensOf(".hover-circle .circle");
+      gsap.killTweensOf(`.home-${this.currentComponent}`);
     }
   },
   watch: {
